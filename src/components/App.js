@@ -1,18 +1,29 @@
+import { useState } from "react";
 import video from "../data/video.js";
+import Video from "../components/Video";
+import Likes from "../components/Likes";
+import CommentsList from "../components/CommentsList";
 
 function App() {
   console.log("Here's your data:", video);
+  const [upvotes, setUpvotes] = useState(video.upvotes);
+  const [downvotes, setDownVotes] = useState(video.downvotes);
 
   return (
     <div className="App">
-      <iframe
-        width="919"
-        height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        frameBorder="0"
-        allowFullScreen
-        title="Thinking in React"
+      <Video
+        title={video.title}
+        embedUrl={video.embedUrl}
+        views={video.views}
+        createdAt={video.createdAt}
       />
+      <Likes
+        upvotes={upvotes}
+        setUpVotes={setUpvotes}
+        downvotes={downvotes}
+        setDownVotes={setDownVotes}
+      />
+      <CommentsList comments={video.comments} />
     </div>
   );
 }
